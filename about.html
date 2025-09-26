@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SportsStatsHub | About</title>
+  <!-- Styles embedded for completeness -->
+  <style>
+    /* CSS Reset and Base Styles */
+    /* CSS Reset to ensure consistent styling across browsers */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Base styles for the entire website */
+    body {
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      color: #333;
+      background-color: #f4f4f4;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img, iframe {
+      max-width: 100%;
+      height: auto;
+      border: none;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 1000;
+      border-radius: 4px;
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    /* Typography Styles */
+    /* Using a simple typography scale: base 16px, h1 2em (32px), h2 1.5em (24px), h3 1.25em (20px), etc. */
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2em; /* 32px */
+      font-weight: bold;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #222;
+      margin-bottom: 1em;
+    }
+
+    h2 {
+      font-size: 1.5em; /* 24px */
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0;
+      margin-bottom: 1em;
+      color: #444;
+    }
+
+    h3 {
+      font-size: 1.25em; /* 20px */
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1em;
+      color: #555;
+    }
+
+    p, span, li {
+      font-size: 1em; /* 16px */
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+
+    strong {
+      font-weight: 600;
+      color: #222;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    /* Layout Structure */
+    /* Using Flexbox for header and footer; Grid for main content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .site-header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 0;
+    }
+
+    .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .main-nav {
+      display: flex;
+      list-style: none;
+      gap: 2em;
+    }
+
+    .main-nav li a {
+      font-weight: 500;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2em;
+      padding: 2em 0;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .about-content {
+      padding: 2em;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .map-container {
+      margin-top: 2em;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: 0;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 2em 0;
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2em;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column h3 {
+      margin-bottom: 1em;
+      color: #fff;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.5em;
+    }
+
+    .footer-column a {
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    .copyright {
+      text-align: center;
+      padding: 1em 20px;
+      background-color: #222;
+      font-size: 0.9em;
+    }
+
+    /* Visual Styles */
+    /* Background, borders, shadows */
+    main {
+      border: 1px solid #dee2e6;
+    }
+
+    .about-content p {
+      background-color: #f8f9fa;
+      padding: 1.5em;
+      border-left: 4px solid #007bff;
+      border-radius: 4px;
+      margin-bottom: 1.5em;
+    }
+
+    /* Pseudo-classes for interactivity */
+    .main-nav li a:hover,
+    .main-nav li a:focus,
+    .main-nav li a:active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus {
+      color: #fff;
+    }
+
+    /* Active nav state from JS */
+    .main-nav .active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    /* Responsive Design */
+    /* Breakpoints: Desktop, Tablet, Mobile*/
+    /* Desktop: Full flex/grid layouts */
+    @media (min-width: 769px) {
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2em 20px;
+      }
+
+      .about-content {
+        padding: 3em;
+      }
+    }
+
+    /* Tablet: Adjust nav to wrap, single column for content */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      .main-nav {
+        flex-direction: column;
+        gap: 1em;
+        text-align: center;
+        width: 100%;
+      }
+
+      .main-nav li {
+        width: 100%;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+        gap: 1em;
+        padding: 1em 0;
+      }
+
+      .about-content {
+        padding: 1.5em;
+      }
+
+      .about-content p {
+        padding: 1em;
+      }
+
+      .map-container iframe {
+        height: 300px;
+      }
+
+      h1 {
+        font-size: 1.75em; /* Slightly smaller */
+      }
+
+      h2 {
+        font-size: 1.375em;
+      }
+
+      p, span, li {
+        font-size: 0.95em;
+      }
+    }
+
+    /* Mobile: Further adjustments, stacked everything */
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+      }
+
+      .container, .header-inner, main, .footer-content {
+        padding: 0 10px;
+      }
+
+      .site-header {
+        padding: 0.5em 0;
+      }
+
+      .main-nav {
+        gap: 0.5em;
+      }
+
+      .main-nav li a {
+        padding: 0.5em;
+        display: block;
+      }
+
+      main {
+        padding: 1em 0;
+        gap: 1em;
+      }
+
+      .about-content {
+        padding: 1em;
+      }
+
+      .about-content p {
+        padding: 0.75em;
+        margin-bottom: 1em;
+      }
+
+      .map-container iframe {
+        height: 250px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      h2 {
+        font-size: 1.25em;
+      }
+
+      h3 {
+        font-size: 1.125em;
+      }
+
+      p, span, li {
+        font-size: 0.9em;
+        line-height: 1.5;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <!-- Website logo -->
+        <img src="pictures/Supreme -Logo.png" alt="SportsStatsHub logo" class="logo">
+        <span>SportsStatsHub</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="main-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="PlayerProfile.html">Players</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="leagues.html">Leagues</a></li>
+          <li><a href="stats.html">Stats</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="about-content">
+      <h1>About SportsStatsHub</h1>
+      <p>
+        Welcome to <strong>SportsStatsHub</strong> – your one-stop platform for exploring the world of sports statistics. 
+        Our mission is to provide fans, researchers, and sports enthusiasts with accurate, detailed, and easy-to-understand 
+        data about players, teams, leagues, and tournaments across the globe.
+      </p>
+
+      <p>
+        At SportsStatsHub, we believe numbers tell stories. From player performance and career achievements 
+        to team histories and league records, we make it simple for you to find the stats that matter. 
+        Whether you’re checking the career of your favorite football star, comparing team performances, 
+        or exploring historical records, we’ve got you covered.
+      </p>
+
+      <p>
+        Our goal is to bring sports closer to you by turning raw data into meaningful insights. 
+        With a user-friendly design, updated information, and profiles of some of the biggest names in sports, 
+        SportsStatsHub is here to keep you informed and connected to the game you love.
+      </p>
+
+      <h2>Where to Find Us</h2>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d893.4492311493914!2d27.808010428312183!3d-26.397747698553868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95aec030bf15d5%3A0x79629f2500192630!2s1078%20Triggerfish%20Cres%2C%20Lawley%2C%201830%2C%20South%20Africa!5e0!3m2!1sen!2sie!4v1756325270232!5m2!1sen!2sie" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Sports</h3>
+        <ul>
+          <li><a href="https://www.flashscore.co.za/">Football</a></li>
+          <li><a href="https://www.flashscore.co.za/basketball/">Basketball</a></li>
+          <li><a href="https://www.flashscore.co.za/baseball/">Baseball</a></li>
+          <li><a href="https://www.flashscore.co.za/tennis/">Tennis</a></li>
+          <li><a href="https://www.flashscore.co.za/field-hockey/">Hockey</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Features</h3>
+        <ul>
+          <li><a href="PlayerProfile.html">Player Profiles</a></li>
+          <li><a href="teams.html">Team Statistics</a></li>
+          <li><a href="leagues.html">League Standings</a></li>
+          <li><a href="stats.html">Historical Data</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 ST10474591 SportsStatsHub. All rights reserved.</p>
+      <p>All data and statistics provided for informational purposes only.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const current = (window.location.pathname.split("/").pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('nav a').forEach(a => {
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        // match exact (teams.html == teams.html) OR match index pages
+        if (href === current || (href === 'index.html' && (current === '' || current === 'index.html'))) {
+          a.classList.add('active');
+          a.setAttribute('aria-current', 'page');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

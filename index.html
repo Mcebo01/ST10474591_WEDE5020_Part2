@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SportsStatsHub | Home</title>
+  <!-- Styles embedded for completeness; move to css/style.css for production -->
+  <style>
+    /* 2.2. CSS Reset and Base Styles */
+    /* CSS Reset to ensure consistent styling across browsers */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Base styles for the entire website */
+    body {
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      color: #333;
+      background-color: #f4f4f4;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 1000;
+      border-radius: 4px;
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    /* 2.3. Typography Styles */
+    /* Using a simple typography scale: base 16px, h1 2em (32px), h2 1.5em (24px), h3 1.25em (20px), etc. */
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2em; /* 32px */
+      font-weight: bold;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #222;
+      margin-bottom: 1em;
+    }
+
+    h2 {
+      font-size: 1.5em; /* 24px */
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0;
+      margin-bottom: 1em;
+      color: #444;
+    }
+
+    h3 {
+      font-size: 1.25em; /* 20px */
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 0.5em;
+      color: #555;
+    }
+
+    p, span, li {
+      font-size: 1em; /* 16px */
+      line-height: 1.6;
+      margin-bottom: 0.5em;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    /* 2.4. Layout Structure */
+    /* Using Flexbox for header, footer columns, hero, and cards; Grid for features, stats, players */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .site-header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 0;
+    }
+
+    .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .main-nav {
+      display: flex;
+      list-style: none;
+      gap: 2em;
+    }
+
+    .main-nav li a {
+      font-weight: 500;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2em;
+      padding: 2em 0;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: #fff;
+      padding: 4em 0;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 2em;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      color: #fff;
+      font-size: 2.5em;
+      margin-bottom: 1em;
+    }
+
+    .hero p {
+      font-size: 1.125em;
+      margin-bottom: 2em;
+      color: #e9ecef;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1em 2em;
+      background-color: #fff;
+      color: #007bff;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      border: 2px solid #fff;
+    }
+
+    .features {
+      background-color: #fff;
+      padding: 3em 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2em;
+      color: #222;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2em;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2em;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 1em;
+    }
+
+    .stats-preview {
+      background-color: #333;
+      color: #fff;
+      padding: 3em 0;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stats-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2em;
+      margin-top: 2em;
+    }
+
+    .stat-item {
+      padding: 1em;
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 0.25em;
+    }
+
+    .stat-label {
+      font-size: 1.125em;
+      color: #ccc;
+    }
+
+    .players-preview {
+      background-color: #fff;
+      padding: 3em 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2em;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .player-card {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .player-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .player-info {
+      padding: 1.5em;
+    }
+
+    .player-name {
+      font-size: 1.25em;
+      font-weight: 600;
+      margin-bottom: 0.25em;
+    }
+
+    .player-position {
+      color: #007bff;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .player-teams {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 1em;
+    }
+
+    .player-link {
+      color: #007bff;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .cta {
+      background-color: #007bff;
+      color: #fff;
+      padding: 3em 0;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta h2 {
+      font-size: 2em;
+      margin-bottom: 1em;
+      color: #fff;
+    }
+
+    .cta p {
+      font-size: 1.125em;
+      margin-bottom: 2em;
+      color: #e9ecef;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 2em 0;
+      margin-top: 2em;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2em;
+      padding: 0 20px;
+    }
+
+    .footer-column h3 {
+      margin-bottom: 1em;
+      color: #fff;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.5em;
+    }
+
+    .footer-column a {
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    .copyright {
+      text-align: center;
+      padding: 1em 20px;
+      background-color: #222;
+      font-size: 0.9em;
+    }
+
+    /* 2.5. Visual Styles */
+    /* Background, borders, shadows */
+    .site-header, .features, .players-preview, .stats-preview, .cta {
+      border: 1px solid #dee2e6;
+    }
+
+    .feature-card, .player-card {
+      border: 1px solid #dee2e6;
+    }
+
+    /* Pseudo-classes for interactivity */
+    .main-nav li a:hover,
+    .main-nav li a:focus,
+    .main-nav li a:active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .btn:hover,
+    .btn:focus,
+    .btn:active {
+      background-color: #0056b3;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .player-link:hover,
+    .player-link:focus {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    .feature-card:hover,
+    .player-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus {
+      color: #fff;
+    }
+
+    /* Active nav state from JS */
+    .main-nav .active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    /* 3. Responsive Design */
+    /* 3.1. Breakpoints: Desktop, Tablet, Mobile */
+    /* Desktop: Full flex/grid layouts */
+    @media (min-width: 769px) {
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2em 20px;
+      }
+
+      .hero-btns {
+        justify-content: center;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .players-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* Tablet: Adjust nav to wrap, adjust grids to fewer columns */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      .main-nav {
+        flex-direction: column;
+        gap: 1em;
+        text-align: center;
+        width: 100%;
+      }
+
+      .main-nav li {
+        width: 100%;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+        gap: 1em;
+        padding: 1em 0;
+      }
+
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      .hero p {
+        font-size: 1em;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .players-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 1.75em; /* Slightly smaller */
+      }
+
+      h2 {
+        font-size: 1.375em;
+      }
+
+      p, span, li {
+        font-size: 0.95em;
+      }
+    }
+
+    /* Mobile: Further adjustments, stacked everything */
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+      }
+
+      .container, .header-inner, main, .footer-content {
+        padding: 0 10px;
+      }
+
+      .site-header {
+        padding: 0.5em 0;
+      }
+
+      .main-nav {
+        gap: 0.5em;
+      }
+
+      .main-nav li a {
+        padding: 0.5em;
+        display: block;
+      }
+
+      .hero {
+        padding: 2em 0;
+      }
+
+      .hero h1 {
+        font-size: 1.5em;
+      }
+
+      .hero p {
+        font-size: 0.95em;
+      }
+
+      .features, .players-preview, .stats-preview, .cta {
+        padding: 2em 0;
+      }
+
+      .feature-card, .player-info {
+        padding: 1em;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1em;
+      }
+
+      .players-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .player-card img {
+        height: 150px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      h2 {
+        font-size: 1.25em;
+      }
+
+      h3 {
+        font-size: 1.125em;
+      }
+
+      p, span, li {
+        font-size: 0.9em;
+        line-height: 1.5;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1em;
+      }
+
+      .btn {
+        width: 50%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <!-- Website logo -->
+        <img src="pictures/Supreme -Logo.png" alt="SportsStatsHub logo" class="logo">
+        <span>SportsStatsHub</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="main-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="PlayerProfile.html">Players</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="leagues.html">Leagues</a></li>
+          <li><a href="stats.html">Stats</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Comprehensive Player Statistics at Your Fingertips</h1>
+        <p>SportsStatsHub provides detailed career statistics, team history, and performance analytics for thousands of professional athletes across multiple sports.</p>
+        <div class="hero-btns">
+          <a href="PlayerProfile.html" class="btn">Explore Players</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="features">
+      <h2 class="section-title">Why SportsStatsHub?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Comprehensive Stats</h3>
+          <p>Access complete career statistics including goals, assists, appearances, ratings, and advanced metrics for every season of a player's career.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⏱️</div>
+          <h3>Historical Data</h3>
+          <p>Track player progression through their entire career with our detailed historical performance data across all teams and competitions.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Advanced Analytics</h3>
+          <p>Explore visualizations and advanced metrics that go beyond basic stats to give deeper insights into player performance.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="stats-preview">
+      <div class="stats-container">
+        <h2 class="section-title">Our Data in Numbers</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">25,000+</div>
+            <div class="stat

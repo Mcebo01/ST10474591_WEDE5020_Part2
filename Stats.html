@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SportsStatsHub | Stats</title>
+  <!-- Styles embedded for completeness; move to css/style.css for production -->
+  <style>
+    /* 2.2. CSS Reset and Base Styles */
+    /* CSS Reset to ensure consistent styling across browsers */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Base styles for the entire website */
+    body {
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      color: #333;
+      background-color: #f4f4f4;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 1000;
+      border-radius: 4px;
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    /* 2.3. Typography Styles */
+    /* Using a simple typography scale: base 16px, h1 2em (32px), h2 1.5em (24px), h3 1.25em (20px), etc. */
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2em; /* 32px */
+      font-weight: bold;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #222;
+      margin-bottom: 1em;
+    }
+
+    h2 {
+      font-size: 1.5em; /* 24px */
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0;
+      margin-bottom: 1em;
+      color: #444;
+    }
+
+    h3 {
+      font-size: 1.25em; /* 20px */
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1em;
+      color: #555;
+    }
+
+    h4 {
+      font-size: 1.125em; /* 18px */
+      font-weight: 500;
+      margin-bottom: 0.5em;
+    }
+
+    p, span, li {
+      font-size: 1em; /* 16px */
+      line-height: 1.6;
+      margin-bottom: 0.5em;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    /* 2.4. Layout Structure */
+    /* Using Flexbox for header, profile elements, and team cards; Grid for main content and profiles */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .site-header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 0;
+    }
+
+    .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .main-nav {
+      display: flex;
+      list-style: none;
+      gap: 2em;
+    }
+
+    .main-nav li a {
+      font-weight: 500;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2em;
+      padding: 2em 0;
+    }
+
+    .player-profile {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      margin-bottom: 2em;
+    }
+
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2em;
+      background-color: #f8f9fa;
+      gap: 1em;
+    }
+
+    .player-image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #007bff;
+    }
+
+    .player-info {
+      text-align: center;
+      gap: 0.5em;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .player-position {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .profile-tabs {
+      display: flex;
+      background-color: #e9ecef;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1em;
+      background: none;
+      border: none;
+      font-size: 1em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 2em;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .career-stats, .team-history, .achievements-list {
+      width: 100%;
+    }
+
+    .career-stats table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+
+    .stats-table th,
+    .stats-table td {
+      padding: 0.75em;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .stats-table th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+    }
+
+    .team-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1em;
+    }
+
+    .team-card {
+      display: flex;
+      gap: 1em;
+      padding: 1em;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      border: 1px solid #dee2e6;
+      align-items: center;
+    }
+
+    .team-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .team-info {
+      flex: 1;
+    }
+
+    .team-period {
+      font-style: italic;
+      color: #666;
+    }
+
+    .achievements-list ul {
+      padding-left: 1.5rem;
+    }
+
+    .achievements-list li {
+      margin-bottom: 0.5em;
+    }
+
+    .stats-facts {
+      background-color: #f8f9fa;
+      padding: 2em;
+      border-radius: 8px;
+      border-left: 4px solid #007bff;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 2em 0;
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2em;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto 1em;
+    }
+
+    .footer-column h3 {
+      margin-bottom: 1em;
+      color: #fff;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.5em;
+    }
+
+    .footer-column a {
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    .copyright {
+      text-align: center;
+      padding: 1em 20px;
+      background-color: #222;
+      font-size: 0.9em;
+    }
+
+    /* 2.5. Visual Styles */
+    /* Background, borders, shadows */
+    .player-profile {
+      border: 1px solid #dee2e6;
+    }
+
+    /* Pseudo-classes for interactivity */
+    .main-nav li a:hover,
+    .main-nav li a:focus,
+    .main-nav li a:active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .tab-btn:hover,
+    .tab-btn:focus {
+      background-color: #0056b3;
+      color: #fff;
+    }
+
+    .team-card:hover {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+      transition: all 0.3s ease;
+    }
+
+    .footer-column a:hover,
+    .footer-column a:focus {
+      color: #fff;
+    }
+
+    /* Active nav state from JS */
+    .main-nav .active {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    /* 3. Responsive Design */
+    /* 3.1. Breakpoints: Desktop (>768px), Tablet (≤768px), Mobile (≤480px) */
+    /* Desktop: Multi-column grids */
+    @media (min-width: 769px) {
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2em 20px;
+      }
+
+      .profile-header {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2em;
+      }
+
+      .player-info {
+        text-align: left;
+        align-items: flex-start;
+      }
+
+      .team-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Tablet: Single-column, adjust nav */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      .main-nav {
+        flex-direction: column;
+        gap: 1em;
+        text-align: center;
+        width: 100%;
+      }
+
+      .main-nav li {
+        width: 100%;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+        gap: 1em;
+        padding: 1em 0;
+      }
+
+      .profile-header {
+        padding: 1.5em;
+      }
+
+      .player-image {
+        width: 120px;
+        height: 120px;
+      }
+
+      .tab-content {
+        padding: 1.5em;
+      }
+
+      .team-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .team-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 1.75em;
+      }
+
+      h2 {
+        font-size: 1.375em;
+      }
+
+      p, span, li {
+        font-size: 0.95em;
+      }
+
+      .profile-tabs {
+        flex-direction: column;
+      }
+    }
+
+    /* Mobile: Stacked everything */
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+      }
+
+      .container, .header-inner, main, .footer-content {
+        padding: 0 10px;
+      }
+
+      .site-header {
+        padding: 0.5em 0;
+      }
+
+      .main-nav {
+        gap: 0.5em;
+      }
+
+      .main-nav li a {
+        padding: 0.5em;
+        display: block;
+      }
+
+      .profile-header {
+        padding: 1em;
+      }
+
+      .player-image {
+        width: 100px;
+        height: 100px;
+      }
+
+      .tab-btn {
+        padding: 0.75em;
+      }
+
+      .tab-content {
+        padding: 1em;
+      }
+
+      .stats-table th,
+      .stats-table td {
+        padding: 0.5em;
+        font-size: 0.9em;
+      }
+
+      .team-logo {
+        width: 50px;
+        height: 50px;
+      }
+
+      .team-card {
+        padding: 0.75em;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      h2 {
+        font-size: 1.25em;
+      }
+
+      h3 {
+        font-size: 1.125em;
+      }
+
+      p, span, li {
+        font-size: 0.9em;
+        line-height: 1.5;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1em;
+      }
+
+      .stats-facts {
+        padding: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <img src="pictures/Supreme -Logo.png" alt="SportsStatsHub logo" class="logo">
+        <span>SportsStatsHub</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="main-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="PlayerProfile.html">Players</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="leagues.html">Leagues</a></li>
+          <li><a href="stats.html">Stats</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <h1>Interesting Stats</h1>
+  
+    <!-- ============================= -->
+    <!-- Cristiano Ronaldo -->
+    <!-- ============================= -->
+    <section class="player-profile" id="ronaldoProfile">
+      <div class="profile-header">
+        <img src="pictures/suiii.jpg" alt="Cristiano Ronaldo" class="player-image">
+        <div class="player-info">
+          <h2 class="player-name">Cristiano Ronaldo</h2>
+          <span class="player-position">Forward</span>
+          <span class="player-age">Age: 39</span>
+          <span class="player-nationality">Nationality: Portugal</span>
+        </div>
+      </div>
+  
+      <div class="profile-tabs">
+        <button class="tab-btn active" data-tab="ronaldo-stats">Career Stats</button>
+        <button class="tab-btn" data-tab="ronaldo-teams">Team History</button>
+        <button class="tab-btn" data-tab="ronaldo-achievements">Achievements</button>
+      </div>
+  
+      <!-- Career Stats -->
+      <div class="tab-content active" id="ronaldo-stats">
+        <div class="career-stats">
+          <h3>Career Statistics</h3>
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>Season</th><th>Team</th><th>Apps</th><th>Goals</th><th>Assists</th><th>Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2022-23</td><td>Al-Nassr</td><td>30</td><td>23</td><td>5</td><td>8.10</td></tr>
+              <tr><td>2021-22</td><td>Manchester United</td><td>38</td><td>24</td><td>3</td><td>7.95</td></tr>
+              <tr><td>2020-21</td><td>Juventus</td><td>44</td><td>36</td><td>5</td><td>8.22</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <!-- Team History -->
+      <div class="tab-content" id="ronaldo-teams">
+        <div class="team-history">
+          <h3>Team History</h3>
+          <div class="team-cards">
+            <div class="team-card"><img src="pictures/al nassr.jpg" alt="Al Nassr logo"><div><h4>Al Nassr</h4><p>2023 - Present</p></div></div>
+            <div class="team-card"><img src="pictures/man utd.jpg" alt="Manchester United logo"><div><h4>Manchester United</h4><p>2003-2009, 2021-22</p></div></div>
+            <div class="team-card"><img src="pictures/real madrid.jpg" alt="Real Madrid logo"><div><h4>Real Madrid</h4><p>2009 - 2018</p></div></div>
+            <div class="team-card"><img src="pictures/Juventus.jpg" alt="Juventus logo"><div><h4>Juventus</h4><p>2018 - 2021</p></div></div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Achievements -->
+      <div class="tab-content" id="ronaldo-achievements">
+        <h3>Achievements</h3>
+        <ul>
+          <li>5× Ballon d'Or</li>
+          <li>5× UEFA Champions League</li>
+          <li>UEFA Euro 2016 Winner</li>
+        </ul>
+      </div>
+    </section>
+  
+<!-- ============================= -->
+<!-- Kylian Mbappé -->
+<!-- ============================= -->
+<div class="player-profile" id="mbappeProfile">
+  <div class="profile-header">
+    <img src="pictures/Kylian.jpg" alt="Kylian Mbappé" class="player-image">
+    <div class="player-info">
+      <h2 class="player-name">Kylian Mbappé</h2>
+      <span class="player-position">Forward</span>
+      <span class="player-age">Age: 25</span>
+      <span class="player-nationality">Nationality: France</span>
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <button class="tab-btn active" data-tab="mbappe-stats">Career Stats</button>
+    <button class="tab-btn" data-tab="mbappe-teams">Team History</button>
+    <button class="tab-btn" data-tab="mbappe-achievements">Achievements</button>
+  </div>
+
+  <!-- Career Stats -->
+  <div class="tab-content active" id="mbappe-stats">
+    <div class="career-stats">
+      <h3>Career Statistics</h3>
+      <table class="stats-table">
+        <thead>
+          <tr><th>Season</th><th>Team</th><th>Apps</th><th>Goals</th><th>Assists</th><th>Rating</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2025-26</td><td>Paris Saint-Germain</td><td>5</td><td>5</td><td>2</td><td>9.0</td></tr>
+          <tr><td>2024-25</td><td>Paris Saint-Germain</td><td>31</td><td>28</td><td>7</td><td>8.7</td></tr>
+          <tr><td>2023-24</td><td>Paris Saint-Germain</td><td>32</td><td>29</td><td>6</td><td>8.8</td></tr>
+          <tr><td>2022-23</td><td>Paris Saint-Germain</td><td>34</td><td>35</td><td>5</td><td>9.2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Team History -->
+  <div class="tab-content" id="mbappe-teams">
+    <div class="team-history">
+      <h3>Team History</h3>
+      <div class="team-cards">
+        <div class="team-card">
+          <img src="pictures/PSG.jpg" alt="PSG logo" class="team-logo">
+          <div class="team-info">
+            <h4 class="team-name">Paris Saint-Germain</h4>
+            <p class="team-period">2017 - Present</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements -->
+  <div class="tab-content" id="mbappe-achievements">
+    <div class="achievements-list">
+      <h3>Achievements</h3>
+      <ul>
+        <li>FIFA World Cup Winner (2018)</li>
+        <li>2× Ligue 1 Champion</li>
+        <li>UEFA Champions League Runner-Up (2020)</li>
+        <li>Golden Boot Winner (2022, 2023)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  
+<!-- ============================= -->
+<!-- Erling Haaland -->
+<!-- ============================= -->
+<div class="player-profile" id="haalandProfile">
+  <div class="profile-header">
+    <img src="pictures/erling haaland.jpg" alt="Erling Haaland" class="player-image">
+    <div class="player-info">
+      <h2 class="player-name">Erling Haaland</h2>
+      <span class="player-position">Striker</span>
+      <span class="player-age">Age: 24</span>
+      <span class="player-nationality">Nationality: Norway</span>
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <button class="tab-btn active" data-tab="haaland-stats">Career Stats</button>
+    <button class="tab-btn" data-tab="haaland-teams">Team History</button>
+    <button class="tab-btn" data-tab="haaland-achievements">Achievements</button>
+  </div>
+
+  <!-- Career Stats -->
+  <div class="tab-content active" id="haaland-stats">
+    <div class="career-stats">
+      <h3>Career Statistics</h3>
+      <table class="stats-table">
+        <thead>
+          <tr><th>Season</th><th>Team</th><th>Apps</th><th>Goals</th><th>Assists</th><th>Rating</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2025-26</td><td>Manchester City</td><td>5</td><td>3</td><td>1</td><td>8.0</td></tr>
+          <tr><td>2024-25</td><td>Manchester City</td><td>30</td><td>28</td><td>3</td><td>8.5</td></tr>
+          <tr><td>2023-24</td><td>Manchester City</td><td>32</td><td>31</td><td>7</td><td>8.6</td></tr>
+          <tr><td>2022-23</td><td>Manchester City</td><td>30</td><td>25</td><td>4</td><td>8.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Team History -->
+  <div class="tab-content" id="haaland-teams">
+    <div class="team-history">
+      <h3>Team History</h3>
+      <div class="team-cards">
+        <div class="team-card">
+          <img src="pictures/man city.jpg" alt="Manchester City logo" class="team-logo">
+          <div class="team-info">
+            <h4 class="team-name">Manchester City</h4>
+            <p class="team-period">2022 - Present</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="pictures/Dortmund.jpg" alt="Borussia Dortmund logo" class="team-logo">
+          <div class="team-info">
+            <h4 class="team-name">Borussia Dortmund</h4>
+            <p class="team-period">2020 - 2022</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements -->
+  <div class="tab-content" id="haaland-achievements">
+    <div class="achievements-list">
+      <h3>Achievements</h3>
+      <ul>
+        <li>Premier League Champion (2023)</li>
+        <li>FIFA Puskás Award (2022)</li>
+        <li>Premier League Player of the Month</li>
+        <li>Bundesliga Top Scorer (2021, 2022)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- ============================= -->
+<!-- Lamine Yamal -->
+<!-- ============================= -->
+<div class="player-profile" id="yamalProfile">
+  <div class="profile-header">
+    <img src="pictures/Lamine Yamal.jpg" alt="Lamine Yamal" class="player-image">
+    <div class="player-info">
+      <h2 class="player-name">Lamine Yamal</h2>
+      <span class="player-position">Forward</span>
+      <span class="player-age">Age: 17</span>
+      <span class="player-nationality">Nationality: Spain</span>
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <button class="tab-btn active" data-tab="yamal-stats">Career Stats</button>
+    <button class="tab-btn" data-tab="yamal-teams">Team History</button>
+    <button class="tab-btn" data-tab="yamal-achievements">Achievements</button>
+  </div>
+
+  <!-- Career Stats -->
+  <div class="tab-content active" id="yamal-stats">
+    <div class="career-stats">
+      <h3>Career Statistics</h3>
+      <table class="stats-table">
+        <thead>
+          <tr><th>Season</th><th>Team</th><th>Apps</th><th>Goals</th><th>Assists</th><th>Rating</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2025-26</td><td>FC Barcelona</td><td>6</td><td>2</td><td>3</td><td>7.5</td></tr>
+          <tr><td>2024-25</td><td>FC Barcelona</td><td>30</td><td>6</td><td>9</td><td>7.4</td></tr>
+          <tr><td>2023-24</td><td>FC Barcelona</td><td>26</td><td>4</td><td>7</td><td>7.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Team History -->
+  <div class="tab-content" id="yamal-teams">
+    <div class="team-history">
+      <h3>Team History</h3>
+      <div class="team-cards">
+        <div class="team-card">
+          <img src="pictures/Barcelona-Logo.png" alt="FC Barcelona logo" class="team-logo">
+          <div class="team-info">
+            <h4 class="team-name">FC Barcelona</h4>
+            <p class="team-period">2023 - Present</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="pictures/Barcelona-Logo.png" alt="Barca logo" class="team-logo">
+          <div class="team-info">
+            <h4 class="team-name">La Masia (Youth)</h4>
+            <p class="team-period">2014 - 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements -->
+  <div class="tab-content" id="yamal-achievements">
+    <div class="achievements-list">
+      <h3>Achievements</h3>
+      <ul>
+        <li>UEFA Euro 2024 Runner-Up (with Spain)</li>
+        <li>Youngest scorer in La Liga for Barcelona</li>
+        <li>Golden Boy nominee (2024, 2025)</li>
+        <li>UEFA Youth League Finalist</li>
+        <li>La Liga Breakthrough Player of the Season (2024)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </section>
+    <!-- ============================= -->
+    <!-- Mohamed Salah -->
+    <!-- ============================= -->
+    <div class="player-profile" id="salahProfile">
+    <div class="profile-header">
+      <img src="pictures/salah.jpg" alt="Mohamed Salah" class="player-image">
+      <div class="player-info">
+        <h2 class="player-name">Mohamed Salah</h2>
+        <span class="player-position">Forward</span>
+        <span class="player-age">Age: 33</span>
+        <span class="player-nationality">Nationality: Egypt</span>
+      </div>
+    </div>
+  
+    <div class="profile-tabs">
+      <button class="tab-btn active" data-tab="salah-stats">Career Stats</button>
+      <button class="tab-btn" data-tab="salah-teams">Team History</button>
+      <button class="tab-btn" data-tab="salah-achievements">Achievements</button>
+    </div>
+  
+    <!-- Career Stats -->
+    <div class="tab-content active" id="salah-stats">
+      <div class="career-stats">
+        <h3>Career Statistics</h3>
+        <table class="stats-table">
+          <thead>
+            <tr><th>Season</th><th>Team</th><th>Apps</th><th>Goals</th><th>Assists</th><th>Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2024-25</td><td>Liverpool</td><td>36</td><td>28</td><td>15</td><td>8.15</td></tr>
+            <tr><td>2023-24</td><td>Liverpool</td><td>52</td><td>25</td><td>14</td><td>8.10</td></tr>
+            <tr><td>2022-23</td><td>Liverpool</td><td>52</td><td>30</td><td>16</td><td>8.20</td></tr>
+            <tr><td>2021-22</td><td>Liverpool</td><td>58</td><td>31</td><td>15</td><td>8.25</td></tr>
+            <tr><td>2020-21</td><td>Liverpool</td><td>50</td><td>31</td><td>5</td><td>8.05</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <!-- Team History -->
+    <div class="tab-content" id="salah-teams">
+      <div class="team-history">
+        <h3>Team History</h3>
+        <div class="team-cards">
+          <div class="team-card">
+            <img src="pictures/liverpool.jpg" alt="Liverpool logo" class="team-logo">
+            <div class="team-info">
+              <h4 class="team-name">Liverpool</h4>
+              <p class="team-period">2017 - Present</p>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="pictures/roma.jpg" alt="AS Roma logo" class="team-logo">
+            <div class="team-info">
+              <h4 class="team-name">AS Roma</h4>
+              <p class="team-period">2015 - 2017</p>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="pictures/Chelsea FC.jpeg" alt="Chelsea logo" class="team-logo">
+            <div class="team-info">
+              <h4 class="team-name">Chelsea</h4>
+              <p class="team-period">2014 - 2015</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Achievements -->
+    <div class="tab-content" id="salah-achievements">
+      <div class="achievements-list">
+        <h3>Achievements</h3>
+        <ul>
+          <li>UEFA Champions League Winner (2019)</li>
+          <li>Premier League Champion (2020)</li>
+          <li>3× Premier League Golden Boot</li>
+          <li>PFA Player of the Year (2018)</li>
+          <li>AFCON Top Scorer (2017)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ============================= -->
+  <!-- Kevin De Bruyne -->
+  <!-- ============================= -->
+  <div class="player-profile" id="debruyneProfile">
+    <div class="profile-header">
+      <img src="pictures/Kevin de Bruyne.jpg" alt="Kevin De Bruyne" class="player-image">
+      <div class="player-info">
+        <h2 class="player-name">Kevin De Bruyne</h2>
+        <span class="player-position">Midfielder</span>
+        <span class="player-age">Age: 34</span>
+        <span class="player-nationality">Nationality: Belgium</span>
+      </div>
+    </div>
+  
+    <div class="profile-tabs">
+      <button class="tab-btn active" data-tab="debruyne-stats">Career Stats</button>
+      <button class="tab-btn" data-tab="debruyne-teams">Team History</button>
+      <button class="tab-btn" data-tab="debruyne-achievements">Achievements</button>
+    </div>
+  
+    <!-- Career Stats -->
+    <div class="tab-content active" id="debruyne-stats">
+      <div class="career-stats">
+        <h3>Career Statistics</h3>
+        <table class="stats-table">
+          <thead>
+            <tr><th>Season</th><th>Team</th><th>Apps</th><th>Goals</th><th>Assists</th><th>Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2025-26</td><td>SSC Napoli</td><td>4</td><td>2</td><td>0</td><td>7.6</td></tr>
+            <tr><td>2024-25</td><td>Manchester City</td><td>28</td><td>4</td><td>7</td><td>7.1</td></tr>
+            <tr><td>2023-24</td><td>Manchester City</td><td>18</td><td>4</td><td>10</td><td>7.9</td></tr>
+            <tr><td>2022-23</td><td>Manchester City</td><td>32</td><td>7</td><td>16</td><td>7.6</td></tr>
+            <tr><td>2021-22</td><td>Manchester City</td><td>30</td><td>15</td><td>8</td><td>7.9</td></tr>
+            <tr><td>2020-21</td><td>Manchester City</td><td>25</td><td>6</td><td>12</td><td>7.9</td></tr>
+            <tr><td>2019-20</td><td>Manchester City</td><td>35</td><td>13</td><td>20</td><td>8.2</td></tr>
+            <tr><td>2018-19</td><td>Manchester City</td><td>19</td><td>2</td><td>2</td><td>7.5</td></tr>
+            <tr><td>2017-18</td><td>Manchester City</td><td>37</td><td>8</td><td>16</td><td>8.0</td></tr>
+            <tr><td>2016-17</td><td>Manchester City</td><td>36</td><td>6</td><td>18</td><td>7.7</td></tr>
+            <tr><td>2015-16</td><td>Manchester City</td><td>25</td><td>7</td><td>10</td><td>7.7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <!-- Team History -->
+    <div class="tab-content" id="debruyne-teams">
+      <div class="team-history">
+        <h3>Team History</h3>
+        <div class="team-cards">
+          <div class="team-card">
+            <img src="pictures/man city.jpg" alt="Manchester City logo" class="team-logo">
+            <div class="team-info">
+              <h4 class="team-name">Manchester City</h4>
+              <p class="team-period">2015 - 2025</p>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="pictures/SSC Napoli.jpg" alt="SSC Napoli logo" class="team-logo">
+            <div class="team-info">
+              <h4 class="team-name">SSC Napoli</h4>
+              <p class="team-period">2025 - Present</p>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="pictures/VfL.jpg" alt="Wolfsburg logo" class="team-logo">
+            <div class="team-info">
+              <h4 class="team-name">Wolfsburg</h4>
+              <p class="team-period">2014 - 2015</p>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="pictures/Chelsea.jpg" alt="Chelsea logo" class="team-logo">
+            <div class="team-info">
+              <h4 class="team-name">Chelsea</h4>
+              <p class="team-period">2012 - 2014</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Achievements -->
+    <div class="tab-content" id="debruyne-achievements">
+      <div class="achievements-list">
+        <h3>Achievements</h3>
+        <ul>
+          <li>UEFA Champions League Winner (2023)</li>
+          <li>6× Premier League Champion</li>
+          <li>3× Premier League Playmaker Award</li>
+          <li>2× FA Cup Winner</li>
+          <li>Premier League Player of the Season</li>
+          <li>PFA Players' Player of the Year</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </main>

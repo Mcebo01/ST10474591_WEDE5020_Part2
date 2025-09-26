@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SportsStatsHub | Teams </title>
+  <!-- link to the external stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <!-- Website logo -->
+        <img src="pictures/Supreme -Logo.png" alt="SportsStatsHub logo" class="logo">
+        <span>SportsStatsHub</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="main-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="PlayerProfile.html">Players</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="leagues.html">Leagues</a></li>
+          <li><a href="stats.html">Stats</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <div class="content">
+      <h1>Teams</h1>
+      <p>Welcome to the Teams section of SportsStatsHub. Browse through teams, their players, and key stats.</p>
+      <div class="team-cards">
+        
+       <!-- FC Barcelona -->
+       <div class="team-card">
+        <div>
+          <h2> Barcelona</h2>
+          <img src="pictures/Barcelona-Logo.png" alt="FC Barcelona Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+        </div>
+      </div>
+        <!-- Bayern -->
+        <div class="team-card">
+          <div>
+            <h2> Bayern</h2>
+            <img src="pictures/Bayern.jpg" alt="FC Bayern Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+          </div>
+        </div>
+
+        <!-- Dortmund -->
+        <div class="team-card">
+            <div>
+              <h2> Dortmund</h2>
+              <img src="pictures/Dortmund.jpg" alt="Dortmund Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+            </div>
+          </div>
+
+        <!-- Chelsea FC-->
+        <div class="team-card">
+            <div>
+              <h2> Chelsea FC</h2>
+              <img src="pictures/Chelsea FC.jpeg" alt="Chelsea FC Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+            </div>
+          </div>
+
+        <!-- Tottenham FC-->
+        <div class="team-card">
+            <div>
+              <h2> Tottenham FC</h2>
+              <img src="pictures/tottenham.jpg" alt="tottenham FC Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+            </div>
+          </div>
+
+        <!-- Man City-->
+        <div class="team-card">
+            <div>
+              <h2> Man City FC</h2>
+              <img src="pictures/man city.jpg" alt="Man City FC Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+            </div>
+          </div>
+
+        <!-- Al Nassr-->
+        <div class="team-card">
+            <div>
+              <h2> Al Nassr</h2>
+              <img src="pictures/al nassr.jpg" alt="Al Nassr Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+            </div>
+          </div>
+
+        <!-- Juventus -->
+        <div class="team-card">
+            <div>
+              <h2> Juventus </h2>
+              <img src="pictures/Juventus.jpg" alt="Juventus Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+            </div>
+          </div>
+
+        <!-- Man Utd -->
+       <div class="team-card">
+        <div>
+          <h2> Man utd</h2>
+          <img src="pictures/man utd.jpg" alt="Man Utd Team Logo" style="width:100%; max-width:200px; border-radius:8px; margin-top:.5rem;">
+        </div>
+      </div>
+
+      </div>
+    </div>
+    <aside>
+      <h2>Quick Links</h2>
+      <ul>
+        <li><a href="PlayerProfile.html">Top Players</a></li>
+        <li><a href="leagues.html">All Leagues</a></li>
+      </ul>
+    </aside>
+  </main>
+    <main>
+        <h2>Popular Football Teams</h2>
+        <ul>
+          <li>FC Barcelona</li>
+          <li>Paris Saint-Germain</li>
+          <li>Inter Miami CF</li>
+          <li>Real Madrid</li>
+			    <li>Man Utd</li>
+			    <li>Chelsea FC</li>
+          <li>Monaco</li>
+          <li>Bayern Munich</li>
+          <li>Juventus</li>
+          <li>VfL Wolfsburg</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; ST10474591 SportsStatsHub. All rights reserved.</p>
+            <p>All data and statistics provided for informational purposes only.</p>
+    </footer>
+    <script>
+        (function () {
+          const current = (window.location.pathname.split("/").pop() || 'index.html').toLowerCase();
+          document.querySelectorAll('nav a').forEach(a => {
+            const href = (a.getAttribute('href') || '').toLowerCase();
+            // match exact (teams.html == teams.html) OR match index pages
+            if (href === current || (href === 'index.html' && (current === '' || current === 'index.html'))) {
+              a.classList.add('active');
+              a.setAttribute('aria-current', 'page');
+            }
+          });
+        })();
+      </script>
+    </body>
+</html>
